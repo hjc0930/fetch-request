@@ -5,8 +5,8 @@ import simpleGetNiddleware from "./middlewares/simpleGetMiddleware";
 import simplePostMiddleware from "./middlewares/simplePostMiddleware";
 import { Options } from "./types";
 
-const requestImplement = (config: Options) => {
-  const instance = new Request(config, [
+const requestImplement = (initialOptions?: Options) => {
+  const instance = new Request(initialOptions, [
     simpleGetNiddleware,
     simplePostMiddleware,
     parseResponseMiddleware,
