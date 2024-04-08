@@ -3,7 +3,7 @@ import { mergeConfig } from "../utils";
 import { MiddlewareType, Options } from "../types";
 import Middleware from "./Middlewares";
 
-class Request {
+class RequestCore {
   private initialOptions: Options;
   private middleware: Middleware;
   public interceptors: {
@@ -69,4 +69,4 @@ class Request {
   };
 }
 
-export default Request;
+export default RequestCore;
