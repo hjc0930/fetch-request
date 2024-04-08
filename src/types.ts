@@ -1,3 +1,5 @@
+import Interceptor from "./core/Interceptor";
+
 export type RequestType = "json" | "form";
 export type ResponseType =
   | "json"
@@ -41,6 +43,10 @@ export type MiddlewareType = (
 
 export interface RequestMethodType {
   (options: Options): Promise<any>;
+  interceptors: {
+    request: Interceptor;
+    response: Interceptor;
+  };
   get: (url: string, options: Options) => Promise<any>;
   post: (url: string, options: Options) => Promise<any>;
   put: (url: string, options: Options) => Promise<any>;
