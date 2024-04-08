@@ -6,20 +6,21 @@ export type ResponseType =
   | "arrayBuffer"
   | "formData";
 
-export type Methods =
+export type Method =
   | "get"
   | "post"
   | "delete"
   | "put"
   | "patch"
   | "head"
-  | "options";
+  | "options"
+  | (string & {});
 export interface Options extends RequestInit {
   basicUrl?: string;
   url?: string;
   data?: any;
   params?: any;
-  method?: Methods;
+  method?: Method;
   timeout?: number;
   requestType?: RequestType;
   responseType?: ResponseType;
