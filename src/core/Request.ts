@@ -30,7 +30,7 @@ class Request {
   public request = (options: Options) => {
     const config = mergeConfig(this.initialOptions, options);
 
-    // 参考axios的拦截器机制
+    // Reference the Axios interceptor implementation
     const requestInterceptorChain = [];
     this.interceptors.request.forEach((interceptor) => {
       requestInterceptorChain.unshift(
