@@ -1,4 +1,4 @@
-interface InterceptorStack<T = any> {
+export interface InterceptorStack<T = any> {
   onFullfilled?: (context: T) => T;
   onRejected?: (context: T) => T;
 }
@@ -20,7 +20,7 @@ class Interceptor<T = any> {
 
   public remove = (id: number) => {
     if (this.interceptors[id]) {
-      this.interceptors[id] = null;
+      this.interceptors[id] = {};
     }
   };
 

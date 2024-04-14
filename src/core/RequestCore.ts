@@ -1,4 +1,4 @@
-import Interceptor from "./Interceptor";
+import Interceptor, { InterceptorStack } from "./Interceptor";
 import { mergeConfig } from "../utils";
 import { MiddlewareType, Options } from "../types";
 import Middleware from "./Middlewares";
@@ -31,14 +31,20 @@ class RequestCore {
     const config = mergeConfig(this.initialOptions, options);
 
     // Reference the Axios interceptor implementation
-    const requestInterceptorChain = [];
+    const requestInterceptorChain: (
+      | InterceptorStack["onFullfilled"]
+      | InterceptorStack["onRejected"]
+    )[] = [];
     this.interceptors.request.forEach((interceptor) => {
       requestInterceptorChain.unshift(
         interceptor.onFullfilled,
         interceptor.onRejected
       );
     });
-    const responseInterceptorChain = [];
+    const responseInterceptorChain: (
+      | InterceptorStack["onFullfilled"]
+      | InterceptorStack["onRejected"]
+    )[] = [];
     this.interceptors.response.forEach((interceptor) => {
       responseInterceptorChain.push(
         interceptor.onFullfilled,
@@ -55,7 +61,7 @@ class RequestCore {
     let promise = Promise.resolve(config);
 
     while (i < length) {
-      promise = promise.then(chain[i++], chain[i++]);
+      promise = promise.then<Options, any>(chain[i++], chain[i++]);
     }
     return promise;
   };

@@ -1,15 +1,15 @@
-import { Options, ResponseContext } from "../types";
+import { Options } from "../types";
 
 export class RequestError {
   [x: string]: any;
   constructor(
     public name: string,
     public message: string,
-    options?: Partial<ResponseContext>
+    options?: Partial<Options>
   ) {
     this.stack = new Error().stack;
     Object.keys(options ?? {}).forEach((key) => {
-      this[key] = options[key];
+      this[key] = options?.[key];
     });
   }
 }
