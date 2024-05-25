@@ -8,7 +8,7 @@ const requestFactor = (
   const instance = instanceImplement(initialOptions);
   const request = instance.request as RequestMethodType;
 
-  request.interceptors = instance.interceptors;
+  request.interceptors = JSON.parse(JSON.stringify(instance.interceptors));
 
   const methods = ["get", "post", "put", "delete", "patch", "head", "options"];
   methods.forEach((method) => {

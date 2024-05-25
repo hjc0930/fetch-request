@@ -11,8 +11,8 @@ const fetchMiddleware: MiddlewareType = async (ctx: Options, next) => {
     throw new Error("Global fetch not exist!");
   }
 
-  const request = new Request(url, restOptions);
-  let response: Response = null;
+  const request = new Request(url || "", restOptions);
+  let response: Response;
 
   // timeout
   if (timeout > 0) {

@@ -4,7 +4,7 @@ import { RequestError, safeJsonParse } from "../utils";
 const parseResponseMiddleware: MiddlewareType = async (ctx: Options, next) => {
   await next();
   const { response, responseType = "json" } = ctx;
-  let cloneResponse: Response = null;
+  let cloneResponse: Response;
   let data = null;
 
   cloneResponse = response.clone();
