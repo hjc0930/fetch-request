@@ -8,6 +8,8 @@ yarn.lock
 # Ignore dist/ or build/ directory
 dist/
 build/
+es/
+lib/
 
 # Ignore any logs or temp files
 

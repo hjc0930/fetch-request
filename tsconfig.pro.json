@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "lib"
+  },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "es",
+    "dist",
+    "**/__tests__",
+    "**/__test__",
+    "**/test",
+    "**/demo",
+    "example",
+    "gulpfile.js",
+    "vitest.config.ts"
+  ]
+}

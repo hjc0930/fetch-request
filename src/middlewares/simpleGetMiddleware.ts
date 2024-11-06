@@ -1,4 +1,4 @@
-import { Methods, MiddlewareType, Options } from "../types";
+import { Method, MiddlewareType, Options } from "../types";
 import formatUrl from "../utils/formatUrl";
 
 // 对请求参数做处理，实现 query 简化
@@ -6,7 +6,7 @@ const simpleGetNiddleware: MiddlewareType = async (context: Options, next) => {
   // Change method to uppercase
   context.method = (
     context.method ? context.method.toUpperCase() : "GET"
-  ) as Methods;
+  ) as Method;
 
   // 设置 credentials 默认值为 same-origin，确保当开发者没有设置时，各浏览器对请求是否发送 cookies 保持一致的行为
   // - omit: 从不发送cookies.
