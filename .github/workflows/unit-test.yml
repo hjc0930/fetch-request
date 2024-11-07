@@ -26,4 +26,4 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Run Unit Test
-        run: npm test:coverage
+        run: npm run test:coverage
