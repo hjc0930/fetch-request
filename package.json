@@ -18,7 +18,8 @@
   },
   "scripts": {
     "build": "gulp && webpack-cli",
-    "test": "vitest --run"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "repository": "https://github.com/hjc0930/request",
   "homepage": "https://github.com/hjc0930/request",
