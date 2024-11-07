@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "build": "gulp && webpack-cli",
-    "test": "vitest"
+    "test": "vitest --run"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
