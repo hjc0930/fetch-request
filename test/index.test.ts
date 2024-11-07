@@ -1,5 +1,10 @@
-import { expect, test } from "vitest";
+import { describe, expect, test } from "vitest";
 
-test("Add", () => {
-  expect(1 + 1).toBe(2);
+describe("Demo", () => {
+  test("Add", () => {
+    expect(1 + 1).toBe(2);
+  });
+  test("Subtract", () => {
+    expect(1 - 1).toBe(0);
+  });
 });
