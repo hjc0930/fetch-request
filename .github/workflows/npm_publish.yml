@@ -25,15 +25,15 @@ jobs:
         # 安装项目依赖，并编译
       - name: Install dependencies & build
         run: |
-	        npm i
-	        npm run build
+              npm i
+              npm run build
 
         # 添加access token到.npmrc
-	  - name: Add Npm Token
-	    run: |
-			echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ./.npmrc
-		    ls -al
-		    cat ./.npmrc
+      - name: Add Npm Token
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ./.npmrc
+          ls -al
+          cat ./.npmrc
 
         # 发布到 npm registry
       - name: Publish to npm repository
