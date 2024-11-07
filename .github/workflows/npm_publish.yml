@@ -38,6 +38,6 @@ jobs:
         # 发布到 npm registry
       - name: Publish to npm repository
         run: npm publish
-        env:
-	        # 读取github的secrets变量，这里的NPM_TOKEN是前面设置的变量名
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+	env:
+ 	  # 读取github的secrets变量，这里的NPM_TOKEN是前面设置的变量名
+    	  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
