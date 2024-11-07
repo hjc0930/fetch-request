@@ -1,9 +1,5 @@
 /node_modules
-*-lock.json
 
-# Ignore package-lock.json or yarn.lock file
-package-lock.json
-yarn.lock
 
 # Ignore dist/ or build/ directory
 dist/
