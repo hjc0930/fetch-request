@@ -71,7 +71,7 @@ export const mergeConfig = (
         }
       : {};
   const mergeParams =
-    initialParams || initialParams
+    initialParams || params
       ? {
           params: {
             ...initialParams,

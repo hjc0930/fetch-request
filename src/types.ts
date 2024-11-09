@@ -42,16 +42,16 @@ export type MiddlewareType = (
 ) => Promise<void>;
 
 export interface RequestMethodType {
-  (options: Options): Promise<any>;
+  (options?: Options): Promise<any>;
   interceptors: {
     request: Interceptor;
     response: Interceptor;
   };
-  get: (url: string, options: Options) => Promise<any>;
-  post: (url: string, options: Options) => Promise<any>;
-  put: (url: string, options: Options) => Promise<any>;
-  delete: (url: string, options: Options) => Promise<any>;
-  patch: (url: string, options: Options) => Promise<any>;
-  head: (url: string, options: Options) => Promise<any>;
-  options: (url: string, options: Options) => Promise<any>;
+  get: (url: string, options?: Options) => Promise<any>;
+  post: (url: string, options?: Options) => Promise<any>;
+  put: (url: string, options?: Options) => Promise<any>;
+  delete: (url: string, options?: Options) => Promise<any>;
+  patch: (url: string, options?: Options) => Promise<any>;
+  head: (url: string, options?: Options) => Promise<any>;
+  options: (url: string, options?: Options) => Promise<any>;
 }

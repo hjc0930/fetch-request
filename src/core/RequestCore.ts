@@ -27,7 +27,7 @@ class RequestCore {
     });
   }
 
-  public request = (options: Options) => {
+  public request = (options: Options = {}) => {
     const config = mergeConfig(this.initialOptions, options);
 
     // Reference the Axios interceptor implementation
