@@ -7,8 +7,8 @@ class RequestCore {
   private initialOptions: Options;
   private middleware: Middleware;
   public interceptors: {
-    request: Interceptor;
-    response: Interceptor;
+    request: Interceptor<Options>;
+    response: Interceptor<Options>;
   };
 
   constructor(
@@ -36,7 +36,7 @@ class RequestCore {
       | InterceptorStack["onRejected"]
     )[] = [];
     this.interceptors.request.forEach((interceptor) => {
-      requestInterceptorChain.unshift(
+      requestInterceptorChain.push(
         interceptor.onFullfilled,
         interceptor.onRejected
       );

@@ -17,7 +17,7 @@ const getSearchParansObject = (url: string) => {
     }
 
     return {
-      origin: urlInstance.origin + urlInstance.pathname,
+      origin: urlInstance.origin,
       searchParams,
     };
   } catch (error) {
@@ -29,21 +29,21 @@ const getSearchParansObject = (url: string) => {
 };
 
 const formatUrl = (config: Options) => {
-  const { basicUrl = "", url = "", params = {} } = config;
+  const { baseURL = "", url = "", params = {} } = config;
 
-  const basicUrlInstance = getSearchParansObject(basicUrl);
+  const baseURLInstance = getSearchParansObject(baseURL);
   const urlInstance = getSearchParansObject(url);
 
   const mergeSearch = new URLSearchParams({
-    ...basicUrlInstance.searchParams,
+    ...baseURLInstance.searchParams,
     ...urlInstance.searchParams,
     ...params,
   }).toString();
 
   if (mergeSearch) {
-    return `${basicUrlInstance.origin}${urlInstance.origin}?${mergeSearch}`;
+    return `${baseURLInstance.origin}${urlInstance.origin}?${mergeSearch}`;
   } else {
-    return `${basicUrlInstance.origin}${urlInstance.origin}`;
+    return `${baseURLInstance.origin}${urlInstance.origin}`;
   }
 };
 

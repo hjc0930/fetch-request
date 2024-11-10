@@ -13,18 +13,18 @@ let users: User[] = [
   { id: 1, name: "Alice", email: "alice@example.com" },
   { id: 2, name: "Bob", email: "bob@example.com" },
 ];
-
-// 获取所有用户
-const getAllUsers = http.get(userUrl, () => {
-  return HttpResponse.json(users);
-});
-
 const onResetData = () => {
   users = [
     { id: 1, name: "Alice", email: "alice@example.com" },
     { id: 2, name: "Bob", email: "bob@example.com" },
   ];
 };
+
+// 获取所有用户
+const getAllUsers = http.get(userUrl, () => {
+  return new HttpResponse(JSON.stringify(users));
+  // return HttpResponse.json(users);
+});
 
 // 获取单个用户
 const getUserById = http.get(userUrl + "/:id", ({ params }) => {

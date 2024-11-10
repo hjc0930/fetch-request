@@ -1,19 +1,21 @@
 import { describe, it, expect, beforeAll, afterAll, afterEach } from "vitest";
 import request from "../src";
-import server from "./utils/mock-http";
+import server, { resetHandlers } from "./utils/mock-http";
 import { Method } from "../src/types";
 import { BASE_URL } from "./utils/constand";
 
-describe("Basic request", () => {
+describe("Base request", () => {
   beforeAll(() => {
     server.listen();
   });
   afterAll(() => {
     server.close();
   });
-  afterEach(() => server.resetHandlers());
+  afterEach(() => {
+    resetHandlers();
+  });
 
-  it("Basic request", async () => {
+  it("Base request for get method", async () => {
     const response = await request({
       url: BASE_URL,
     });

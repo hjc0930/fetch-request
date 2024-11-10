@@ -1,14 +1,16 @@
+import { RequestError } from "../utils";
+
 export interface InterceptorStack<T = any> {
   onFullfilled?: (context: T) => T;
-  onRejected?: (context: T) => T;
+  onRejected?: (error: RequestError) => T;
 }
 
 class Interceptor<T = any> {
   private interceptors: InterceptorStack<T>[] = [];
 
   public use = (
-    onFullfilled?: InterceptorStack["onFullfilled"],
-    onRejected?: InterceptorStack["onRejected"]
+    onFullfilled?: InterceptorStack<T>["onFullfilled"],
+    onRejected?: InterceptorStack<T>["onRejected"]
   ): number => {
     this.interceptors.push({
       onFullfilled,
@@ -28,7 +30,7 @@ class Interceptor<T = any> {
     this.interceptors = [];
   };
 
-  public forEach = (fn: (interceptor: InterceptorStack) => void) => {
+  public forEach = (fn: (interceptor: InterceptorStack<T>) => void) => {
     this.interceptors.forEach(fn);
   };
 }

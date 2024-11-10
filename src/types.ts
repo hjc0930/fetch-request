@@ -17,13 +17,15 @@ export type Method =
   | "head"
   | "options"
   | (string & {});
+
 export interface Options extends RequestInit {
-  basicUrl?: string;
+  baseURL?: string;
   url?: string;
   data?: any;
   params?: any;
   method?: Method;
   timeout?: number;
+  // headers?: Headers;
   requestType?: RequestType;
   responseType?: ResponseType;
   [key: string]: any;
@@ -44,8 +46,8 @@ export type MiddlewareType = (
 export interface RequestMethodType {
   (options?: Options): Promise<any>;
   interceptors: {
-    request: Interceptor;
-    response: Interceptor;
+    request: Interceptor<Options>;
+    response: Interceptor<Options>;
   };
   get: (url: string, options?: Options) => Promise<any>;
   post: (url: string, options?: Options) => Promise<any>;

@@ -1,8 +1,13 @@
 import { setupServer } from "msw/node";
 import baseHandlers from "./base.mock";
 import userHandlers, { onResetData } from "./user.mock";
+import authhandles from "./auth.mock";
 
-const mergeHandlers = [...baseHandlers, ...userHandlers];
+const mergeHandlers = [
+  ...userHandlers,
+  ...authhandles,
+  // ...baseHandlers
+];
 
 const server = setupServer(...mergeHandlers);
 

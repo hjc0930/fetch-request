@@ -1,4 +1,3 @@
-import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
 import { BASE_URL } from "../constand";
 
