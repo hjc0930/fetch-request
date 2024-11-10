@@ -16,8 +16,9 @@ const getSearchParansObject = (url: string) => {
       searchParams[key] = value;
     }
 
+    const pathname = urlInstance.pathname === "/" ? "" : urlInstance.pathname;
     return {
-      origin: urlInstance.origin,
+      origin: urlInstance.origin + pathname,
       searchParams,
     };
   } catch (error) {

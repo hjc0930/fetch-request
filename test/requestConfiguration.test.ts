@@ -46,7 +46,7 @@ describe("Request configuration", () => {
     request.interceptors.response.use(responseFn);
 
     try {
-      await request.get("/timeout");
+      await request.get("/auth/timeout");
     } catch (error) {
       expect(error?.name).toBe("Timeout");
       expect(responseFn).not.toHaveBeenCalled();
