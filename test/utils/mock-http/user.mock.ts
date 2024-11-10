@@ -9,7 +9,7 @@ interface User {
 
 const userUrl = BASE_URL + "/users";
 // 模拟的用户数据
-const users: User[] = [
+let users: User[] = [
   { id: 1, name: "Alice", email: "alice@example.com" },
   { id: 2, name: "Bob", email: "bob@example.com" },
 ];
@@ -19,14 +19,21 @@ const getAllUsers = http.get(userUrl, () => {
   return HttpResponse.json(users);
 });
 
+const onResetData = () => {
+  users = [
+    { id: 1, name: "Alice", email: "alice@example.com" },
+    { id: 2, name: "Bob", email: "bob@example.com" },
+  ];
+};
+
 // 获取单个用户
 const getUserById = http.get(userUrl + "/:id", ({ params }) => {
   const { id } = params as { id: string };
   const user = users.find((u) => u.id === parseInt(id));
   if (user) {
-    return HttpResponse.json(users);
+    return HttpResponse.json(user);
   } else {
-    return new HttpResponse(JSON.stringify(users), {
+    return new HttpResponse(null, {
       status: 404,
     });
   }
@@ -51,7 +58,9 @@ const updateUser = http.put(userUrl + "/:id", async ({ request, params }) => {
 
   if (userIndex !== -1) {
     users[userIndex] = { ...users[userIndex], ...user };
-    return HttpResponse.json(users[userIndex]);
+    return new HttpResponse(JSON.stringify(users[userIndex]), {
+      status: 200,
+    });
   } else {
     return new HttpResponse("User not found", {
       status: 404,
@@ -83,5 +92,7 @@ const userHandlers = [
   updateUser,
   deleteUser,
 ];
+
+export { onResetData };
 
 export default userHandlers;
