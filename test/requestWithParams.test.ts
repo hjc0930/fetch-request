@@ -1,17 +1,42 @@
-import { describe, it, expect, beforeAll, afterAll, afterEach } from "vitest";
+import {
+  describe,
+  it,
+  expect,
+  beforeAll,
+  afterAll,
+  afterEach,
+  vi,
+  beforeEach,
+} from "vitest";
 import request from "../src";
 import server, { resetHandlers } from "./utils/mock-http";
 import { BASE_URL } from "./utils/constand";
+import { readFileSync } from "node:fs";
+import { fs, vol } from "memfs";
+
+const readHelloWorld = (path) => {
+  return readFileSync(path, {
+    encoding: "utf-8",
+  });
+};
+
+// tell vitest to use fs mock from __mocks__ folder
+// this can be done in a setup file if fs should always be mocked
+vi.mock("node:fs");
+vi.mock("node:fs/promises");
 
 describe("Request with params", () => {
+  beforeEach(() => {
+    vol.reset();
+  });
+  afterEach(() => {
+    resetHandlers();
+  });
   beforeAll(() => {
     server.listen();
   });
   afterAll(() => {
     server.close();
-  });
-  afterEach(() => {
-    resetHandlers();
   });
 
   it("Request with query", async () => {
@@ -170,12 +195,22 @@ describe("Request with params", () => {
     expect(response.data).toEqual(data);
   });
 
-  it("Request with file", async () => {
-    const file = new File(["hello"], "hello.txt", {
-      type: "text/plain",
+  it("should return correct text", () => {
+    const path = "/hello-world.txt";
+    fs.writeFileSync(path, "hello world", {
+      encoding: "utf-8",
     });
+
+    const text = readHelloWorld(path);
+    expect(text).toBe("hello world");
+  });
+
+  it("Request with file", async () => {
+    // const file = new File(["hello"], "hello.txt", {
+    //   type: "text/plain",
+    // });
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", "123123");
 
     const response = await request.post(BASE_URL + "/file", {
       data: formData,

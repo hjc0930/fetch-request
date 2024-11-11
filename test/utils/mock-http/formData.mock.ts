@@ -10,15 +10,20 @@ const formDataHandlers = [
   }),
 
   http.post(BASE_URL + "/file", async ({ request }) => {
-    const formData = await request.formData();
-    const file = formData.get("file") as File;
+    try {
+      const formData = await request.formData();
+      // const file = formData.get("file") as File;
+      console.log(formData);
 
-    return new HttpResponse(file.name, {
-      headers: {
-        "content-type": "text/plain", // Set the correct content type for the file
-        "content-disposition": "attachment; filename=file.txt", // Set the correct content disposition for the file
-      },
-    });
+      return new HttpResponse("123123", {
+        headers: {
+          "content-type": "text/plain", // Set the correct content type for the file
+          "content-disposition": "attachment; filename=file.txt", // Set the correct content disposition for the file
+        },
+      });
+    } catch (error) {
+      return new HttpResponse("Error uploading file", { status: 500 });
+    }
   }),
 ];
 

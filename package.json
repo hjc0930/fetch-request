@@ -52,6 +52,7 @@
     "gulp-babel": "^8.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "jsdom": "^25.0.1",
+    "memfs": "^4.14.0",
     "msw": "^2.6.2",
     "typescript": "^5.6.3",
     "vitest": "^2.1.4",
