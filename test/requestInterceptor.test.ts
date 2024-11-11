@@ -26,7 +26,7 @@ describe("Request interceptor", () => {
   it("Request interceptor", async () => {
     const request = create();
     request.interceptors.request.use((context) => {
-      context.headers?.set("Authorization", "Bearer valid_token");
+      context.headers?.set("Token", "Bearer valid_token");
       return context;
     });
 

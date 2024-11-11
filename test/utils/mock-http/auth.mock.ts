@@ -5,7 +5,7 @@ const authUrl = BASE_URL + "/auth";
 
 const authhandles = [
   http.post(authUrl, ({ request }) => {
-    const token = request.headers.get("Authorization")?.split(" ")?.[1];
+    const token = request.headers.get("Token")?.split(" ")?.[1];
 
     if (!token) {
       return new HttpResponse("Unauthorized", {
