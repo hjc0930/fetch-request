@@ -1,4 +1,5 @@
 import Interceptor from "./core/Interceptor";
+import { RequestError } from "./utils";
 
 export type RequestType = "json" | "form";
 export type ResponseType =
@@ -25,7 +26,7 @@ export interface Options extends RequestInit {
   params?: any;
   method?: Method;
   timeout?: number;
-  // headers?: Headers;
+  headers?: Headers;
   requestType?: RequestType;
   responseType?: ResponseType;
   [key: string]: any;
@@ -44,16 +45,37 @@ export type MiddlewareType = (
 ) => Promise<void>;
 
 export interface RequestMethodType {
-  (options?: Options): Promise<any>;
+  <RequestReturn = any>(options?: Options): Promise<RequestReturn>;
   interceptors: {
-    request: Interceptor<Options>;
-    response: Interceptor<Options>;
+    request: Interceptor<Options, RequestError>;
+    response: Interceptor<Options, RequestError>;
   };
-  get: (url: string, options?: Options) => Promise<any>;
-  post: (url: string, options?: Options) => Promise<any>;
-  put: (url: string, options?: Options) => Promise<any>;
-  delete: (url: string, options?: Options) => Promise<any>;
-  patch: (url: string, options?: Options) => Promise<any>;
-  head: (url: string, options?: Options) => Promise<any>;
-  options: (url: string, options?: Options) => Promise<any>;
+  get: <RequestReturn = any>(
+    url: string,
+    options?: Options
+  ) => Promise<RequestReturn>;
+  post: <RequestReturn = any>(
+    url: string,
+    options?: Options
+  ) => Promise<RequestReturn>;
+  put: <RequestReturn = any>(
+    url: string,
+    options?: Options
+  ) => Promise<RequestReturn>;
+  delete: <RequestReturn = any>(
+    url: string,
+    options?: Options
+  ) => Promise<RequestReturn>;
+  patch: <RequestReturn = any>(
+    url: string,
+    options?: Options
+  ) => Promise<RequestReturn>;
+  head: <RequestReturn = any>(
+    url: string,
+    options?: Options
+  ) => Promise<RequestReturn>;
+  options: <RequestReturn = any>(
+    url: string,
+    options?: Options
+  ) => Promise<RequestReturn>;
 }

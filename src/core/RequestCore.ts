@@ -1,5 +1,5 @@
 import Interceptor, { InterceptorStack } from "./Interceptor";
-import { mergeConfig } from "../utils";
+import { mergeConfig, RequestError } from "../utils";
 import { MiddlewareType, Options } from "../types";
 import Middleware from "./Middlewares";
 
@@ -7,8 +7,8 @@ class RequestCore {
   private initialOptions: Options;
   private middleware: Middleware;
   public interceptors: {
-    request: Interceptor<Options>;
-    response: Interceptor<Options>;
+    request: Interceptor<Options, RequestError>;
+    response: Interceptor<Options, RequestError>;
   };
 
   constructor(

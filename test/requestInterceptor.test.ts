@@ -26,13 +26,8 @@ describe("Request interceptor", () => {
   it("Request interceptor", async () => {
     const request = create();
     request.interceptors.request.use((context) => {
-      return {
-        ...context,
-        headers: {
-          ...context.headers,
-          Authorization: "Bearer valid_token",
-        },
-      };
+      context.headers?.set("Authorization", "Bearer valid_token");
+      return context;
     });
 
     const response = await request.post(BASE_URL + "/auth");
@@ -92,5 +87,18 @@ describe("Request interceptor", () => {
     );
     const response = await request.post(BASE_URL + "/auth");
     expect(response.status).toBe(401);
+  });
+
+  it("Remove interceptor", async () => {
+    const fn = vi.fn((context) => context);
+    const request = create();
+    const interceptorId = request.interceptors.request.use(fn);
+    await request.get(BASE_URL);
+    expect(fn).toHaveBeenCalledTimes(1);
+
+    fn.mockReset();
+    request.interceptors.request.remove(interceptorId);
+    await request.get(BASE_URL);
+    expect(fn).toHaveBeenCalledTimes(0);
   });
 });

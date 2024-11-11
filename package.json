@@ -42,6 +42,7 @@
     "@babel/preset-env": "^7.26.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.0.1",
+    "@types/qs": "^6.9.17",
     "@vitest/coverage-v8": "^2.1.4",
     "@vitest/ui": "^2.1.4",
     "babel-plugin-import": "^1.12.0",
@@ -59,5 +60,8 @@
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.9.5"
+  },
+  "dependencies": {
+    "qs": "^6.13.0"
   }
 }

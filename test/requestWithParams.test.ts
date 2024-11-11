@@ -157,4 +157,31 @@ describe("Request with params", () => {
       ]);
     }
   });
+  it("Request with form data", async () => {
+    const data = {
+      name: "Alice",
+      email: "alice@example.com",
+    };
+    const response = await request.post(BASE_URL + "/form", {
+      data,
+      requestType: "form",
+    });
+
+    expect(response.data).toEqual(data);
+  });
+
+  it("Request with file", async () => {
+    const file = new File(["hello"], "hello.txt", {
+      type: "text/plain",
+    });
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await request.post(BASE_URL + "/file", {
+      data: formData,
+      // responseType: "blob",
+    });
+
+    expect(response.data).toBeInstanceOf(Blob);
+  });
 });

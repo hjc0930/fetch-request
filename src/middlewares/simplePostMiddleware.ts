@@ -1,4 +1,5 @@
 import { MiddlewareType, Options } from "../types";
+import { reqStringify, setHeaders } from "../utils";
 
 const simplePostMiddleware: MiddlewareType = async (context: Options, next) => {
   const { method = "get" } = context;
@@ -14,26 +15,26 @@ const simplePostMiddleware: MiddlewareType = async (context: Options, next) => {
     const dataType = Object.prototype.toString.call(data);
     if (dataType === "[object Object]" || dataType === "[object Array]") {
       if (requestType === "json") {
-        context.headers = {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-          ...context.headers,
-        };
+        setHeaders(context, "Accept", "application/json");
+        setHeaders(context, "Content-Type", "application/json;charset=UTF-8");
+
         context.body = JSON.stringify(data);
       } else if (requestType === "form") {
-        context.headers = {
-          Accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-          ...context.headers,
-        };
-        context.body = new URLSearchParams(data).toString();
+        setHeaders(context, "Accept", "application/json");
+        setHeaders(
+          context,
+          "Content-Type",
+          "application/x-www-form-urlencoded;charset=UTF-8"
+        );
+        context.body = reqStringify(data, {
+          arrayFormat: "repeat",
+          strictNullHandling: true,
+        });
       }
     } else {
       // order requestType
-      context.headers = {
-        Accept: "application/json",
-        ...context.headers,
-      };
+      setHeaders(context, "Accept", "application/json");
+
       context.body = data;
     }
   }
