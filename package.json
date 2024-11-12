@@ -1,6 +1,6 @@
 {
   "name": "@hjc0930/fetch-request",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Fetch request tool",
   "license": "MIT",
   "sideEffects": false,
