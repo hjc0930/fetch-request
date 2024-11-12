@@ -1,7 +1,11 @@
-const gulp = require("gulp");
-const babel = require("gulp-babel");
-const ts = require("gulp-typescript");
-const { deleteSync } = require("del");
+// const gulp = require("gulp");
+// const babel = require("gulp-babel");
+// const ts = require("gulp-typescript");
+// const { deleteSync } = require("del");
+import gulp from "gulp";
+import babel from "gulp-babel";
+import ts from "gulp-typescript";
+import { deleteSync } from "del";
 
 gulp.task("clean", async () => {
   return deleteSync(["lib/**", "es/**", "dist/**"]);
@@ -37,4 +41,7 @@ gulp.task("declaration", () => {
     .pipe(gulp.dest("lib/"));
 });
 
-exports.default = gulp.series("clean", "es", "cjs", "declaration");
+// exports.default = gulp.series("clean", "es", "cjs", "declaration");
+const tasks = gulp.series("clean", "es", "cjs", "declaration");
+
+export default tasks;
