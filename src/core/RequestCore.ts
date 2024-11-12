@@ -1,5 +1,5 @@
 import Interceptor, { InterceptorStack } from "./Interceptor";
-import { mergeConfig } from "../utils";
+import { mergeConfig, RequestError } from "../utils";
 import { MiddlewareType, Options } from "../types";
 import Middleware from "./Middlewares";
 
@@ -7,8 +7,8 @@ class RequestCore {
   private initialOptions: Options;
   private middleware: Middleware;
   public interceptors: {
-    request: Interceptor;
-    response: Interceptor;
+    request: Interceptor<Options, RequestError>;
+    response: Interceptor<Options, RequestError>;
   };
 
   constructor(
@@ -27,7 +27,7 @@ class RequestCore {
     });
   }
 
-  public request = (options: Options) => {
+  public request = (options: Options = {}) => {
     const config = mergeConfig(this.initialOptions, options);
 
     // Reference the Axios interceptor implementation
@@ -36,7 +36,7 @@ class RequestCore {
       | InterceptorStack["onRejected"]
     )[] = [];
     this.interceptors.request.forEach((interceptor) => {
-      requestInterceptorChain.unshift(
+      requestInterceptorChain.push(
         interceptor.onFullfilled,
         interceptor.onRejected
       );

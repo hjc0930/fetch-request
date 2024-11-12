@@ -1,5 +1,5 @@
 import request, { create, requestFactor } from "./request";
-import Request from "./core/RequestCore";
+import RequestCore from "./core/RequestCore";
 import fetchMiddleware from "./middlewares/fetchMiddleware";
 import parseResponseMiddleware from "./middlewares/parseResponseMiddleware";
 import simpleGetMiddleware from "./middlewares/simpleGetMiddleware";
@@ -12,6 +12,6 @@ export {
   parseResponseMiddleware,
   simpleGetMiddleware,
   simplePostMiddleware,
-  Request,
+  RequestCore,
 };
 export default request;
